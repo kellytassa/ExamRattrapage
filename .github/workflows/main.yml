@@ -1,0 +1,18 @@
+name: Workflow Examen
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-urgency:
+    runs-on: ubuntu-latest
+    env:
+      ENV_TYPE: PRODUCTION
+    steps:
+      - name: Verifier la branche source
+        run: |
+          echo "ENV_TYPE: $ENV_TYPE"
+          if [[ "${{ github.head_ref }}" == hotfix/* ]]; then
+            echo "URGENCE DETECTEE"
+          fi
+
